@@ -1,119 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<style type="text/css">
-	*{
-		padding:0;
-		margin: 0;
-		border:none;
-	}
-	html{
-		width:100%;
-		height:100%;
-	}
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
 
-	body{
-		background:linear-gradient(to right,#96deda,hotpink);
-		width:100%;
-		height:100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	
-	}
-	.tab{
-		min-width:0px;           /*Its minimum height,so that table can be resized according to the data inside it*/
-		min-height:0px;
-	}
-	.text{
-		height:40px;
-		width:264px;
-		font-size:25px;
-		background:linear-gradient(to right,#ff9a9e,#fad0c4);
-		color:black;
-		box-shadow:-3px -3px 5px 1px #ffffff73,5px 5px 10px rgba(94,104,121,.4);
-	}
-	.button{
-		width:50px;
-		height:50px;
-		margin:10px;
-		font-size:25px;
-		background-color:rgba(128,128,128,0.4);
-		border-radius:10px;
-		box-shadow:-3px -3px 5px #ffffff73,5px 5px 10px 2px rgba(94,104,121,.4);
-	}
-	.button:focus{
-		outline: none;
-			}
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to right, #96deda, hotpink);
+        }
 
-	.button:hover{
-		cursor: pointer;
-		background-color: black;
-		color:blanchedalmond;
-	}
-	.text:hover{
-		cursor:not-allowed;
-	}
+        .calcontainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 500px;
+            height: 500px;
+        }
 
-	</style>
-	<title></title>
+        .text {
+            flex-basis: 40px;
+            width: 280px;
+            font-size: 2vw;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: black;
+            box-shadow: -3px -3px 5px 1px #ffffff73, 5px 5px 10px rgba(94, 104, 121, .4);
+            outline: none;
+            border: none;
+            padding: 0px 10px;
+        }
+
+        .text:hover {
+            cursor: not-allowed;
+        }
+
+        .tab {
+            display: grid;
+            grid-template-rows: repeat(5, 60px);
+            grid-gap: 0.4rem;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+            grid-gap: 0.4rem;
+        }
+
+        .rows {
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+            grid-gap: 0.4rem;
+        }
+
+        .rowe {
+            display: grid;
+            grid-template-columns: auto 70px 70px;
+            grid-gap: 0.4rem;
+        }
+
+        .rows .data:nth-of-type(4) {
+            display: grid;
+            grid-template-rows: 120px;
+            grid-template-columns: 50px;
+        }
+
+        .data {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 50px;
+            height: 50px;
+            border: none;
+            margin: 10px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 100%;
+            height: 100%;
+            font-size: 25px;
+            background-color: rgba(128, 128, 128, 0.4);
+            border-radius: 10px;
+            box-shadow: -3px -3px 5px #ffffff73, 5px 5px 10px 2px rgba(94, 104, 121, .4);
+            border: none;
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        .button:hover {
+            cursor: pointer;
+            background-color: black;
+            color: blanchedalmond;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
 </head>
+
 <body>
+    <div class="container">
+        <div class="calcontainer">
+            <input class="text" disabled>
+            <div class="tab">
+                <div class="row">
+                    <div class="data"><input type="button" value="C" class="button" onclick="clean()"></div>
+                    <div class="data"><input type="button" value="<" class="button" onclick="back()"></div>
+                    <div class="data"><input type="button" value="/" class="button" onclick="insert('/')"></div>
+                    <div class="data"><input type="button" value="X" class="button" onclick="insert('*')"></div>
+                </div>
+                <div class="row">
+                    <div class="data"><input type="button" value="7" class="button" onclick="insert(7)"></div>
+                    <div class="data"><input type="button" value="8" class="button" onclick="insert(8)"></div>
+                    <div class="data"><input type="button" value="9" class="button" onclick="insert(9)"></div>
 
-<input class="text" disabled>
+                    <div class="data"><input type="button" value="-" class="button" onclick="insert('-')"></div>
+                </div>
+                <div class="row">
+                    <div class="data"><input type="button" value="4" class="button" onclick="insert(4)"></div>
+                    <div class="data"><input type="button" value="5" class="button" onclick="insert(5)"></div>
+                    <div class="data"><input type="button" value="6" class="button" onclick="insert(6)"></div>
+                    <div class="data"><input type="button" value="+" class="button" onclick="insert('+')"></div>
+                </div>
+                <div class="rows">
+                    <div class="data"><input type="button" value="1" class="button" onclick="insert(1)"></div>
+                    <div class="data"><input type="button" value="2" class="button" onclick="insert(2)"></div>
+                    <div class="data"><input type="button" value="3" class="button" onclick="insert(3)"></div>
+                    <div class="data"><input type="button" value="=" class="button" onclick="equal()"></div>
+                </div>
+                <div class="rowe">
+                    <div class="data"><input type="button" value="0" class="button" onclick="insert(0)"></div>
+                    <div class="data"><input type="button" value="." class="button" onclick="insert('.')"></div>
+                </div>
 
-<table class="tab">
-	<tr>
-		<td><input type="button" value="C" class="button" onclick="clean()"></td>
-		<td><input type="button" value="<" class="button" onclick="back()"></td>
-		<td><input type="button" value="/" class="button" onclick="insert('/')"></td>
-		<td><input type="button" value="X" class="button" onclick="insert('*')"></td>
-	</tr>
-	<tr>
-		<td><input type="button" value="7" class="button" onclick="insert(7)"></td>
-		<td><input type="button" value="8" class="button" onclick="insert(8)"></td>
-		<td><input type="button" value="9" class="button" onclick="insert(9)"></td>
-		<td><input type="button" value="-" class="button" onclick="insert('-')"></td>
-	</tr>
-	<tr>
-		<td><input type="button" value="4" class="button" onclick="insert(4)"></td>
-		<td><input type="button" value="5" class="button" onclick="insert(5)"></td>
-		<td><input type="button" value="6" class="button" onclick="insert(6)"></td>
-		<td><input type="button" value="+" class="button" onclick="insert('+')"></td>
-	</tr>
-	<tr>
-		<td><input type="button" value="1" class="button" onclick="insert(1)"></td>
-		<td><input type="button" value="2" class="button" onclick="insert(2)"></td>
-		<td><input type="button" value="3" class="button" onclick="insert(3)"></td>
-		<td rowspan="2"><input  style="height:125px;" type="button" value="=" class="button" onclick="equal()"></td>
-	</tr>
-	<tr>
-		<td colspan="2"><input  style="width:120px;" type="button" value="0" class="button" onclick="insert(0)"></td>
-		<td><input type="button" value="." class="button" onclick="insert('.')"></td>
-	</tr>
-</table>
+            </div>
+        </div>
+    </div>
+</body>
 
 <script type="text/javascript">
-let input=document.querySelector("input[class=text]");
-function insert(num){
-	input.value=input.value+num;
-}
-function equal(){
-	var exp=input.value;
-	if (exp){
-		input.value=eval(exp);
-	}
-}
-function clean(){
-	input.value="";
-}
-function back(){
-	var exp=input.value;
-	input.value=exp.substring(0,exp.length-1);
-}
+    let input = document.querySelector("input[class=text]");
+    function insert(num) {
+        input.value = input.value + num;
+    }
+    function equal() {
+        var exp = input.value;
+        if (exp) {
+            input.value = eval(exp);
+        }
+    }
+    function clean() {
+        input.value = "";
+    }
+    function back() {
+        var exp = input.value;
+        input.value = exp.substring(0, exp.length - 1);
+    }
 </script>
-</body>
+
 </html>
-
-
